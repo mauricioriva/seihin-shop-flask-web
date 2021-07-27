@@ -1,0 +1,1 @@
+# seihin-shop-flask-web
