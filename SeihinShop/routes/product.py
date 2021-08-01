@@ -36,7 +36,7 @@ def new_product_template():
 # GET obtiene los productos que vende el usuario (Devuelve html)
 # POST crea un nuevo producto por el usuario 
 @product_bp.route('/products/users/<user_id>', methods=['GET', 'POST'])
-def sell(user_id):
+def on_sale(user_id):
     if request.method == 'GET':
         return list_sell_products(request, user_id)
     else:

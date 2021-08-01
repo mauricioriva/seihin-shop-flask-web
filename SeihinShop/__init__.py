@@ -1,9 +1,11 @@
 from flask import Flask
 
 def create_app():
-    from . import routes #, models
+    from . import routes 
+    from . import db
     app = Flask(__name__)
-    # models.init_app(app)
+    app.config['DATABASE'] = '/tmp/flaskr.db'
+    db.init_app(app)
     routes.init_app(app)
-    app.secret_key = '1234ed'
+    app.secret_key = '1234qwer'
     return app
