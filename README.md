@@ -7,6 +7,7 @@ https://flask.palletsprojects.com/en/2.0.x/installation/
 ## Set Env
 
     $ export FLASK_APP=SeihinShop
+    $ export FLASK_ENV=development
 
 ## Create Database
     
