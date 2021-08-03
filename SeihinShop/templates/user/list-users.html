@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Usuarios{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th class="text-center">Id</th>
+            <th class="text-center">Nombre(s)</th>
+            <th class="text-center">Apellidos</th>
+            <th class="text-center">Email</th>
+            <th class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for user in users: %}
+        <td class="text-center align-middle">{{ user[0] }}</td>
+        <td class="text-center align-middle">{{ user[3] }}</td>
+        <td class="text-center align-middle">{{ user[4] }}</td>
+        <td class="text-center align-middle">{{ user[1] }}</td>
+        <td class="text-center align-middle"><a href="{{ url_for('users_page.user', user_id=user[0]) }}">Ver mas</a></td>
+    </tbody>
+      {% endfor %}
+  </table>
+{% endblock %}

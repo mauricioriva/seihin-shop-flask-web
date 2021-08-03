@@ -1,24 +1,25 @@
-from flask import request, Blueprint
+from flask import request, Blueprint, render_template
+from ..db import get_db
 
-user_bp = Blueprint('users_page', __name__, template_folder='templates')
+user_bp = Blueprint('users_page', __name__, template_folder='./../templates/user')
 
 # GET users (obtienes la lista de usuarios registrados) (Devuelve un html)
 # HINT: return render_template('your_view.html', your_list=your_list)
 @user_bp.route('/users', methods=['GET'])
 def users():
-    pass
+    users = get_db().execute(
+        'SELECT * FROM user'
+    ).fetchall()
+    return render_template('list-users.html', users=users)
 
 # GET user, obtienes la informacion de un usuario (Devuelve un html)
 # HINT: return render_template('your_view.html', your_list=your_list)
-@user_bp.route('/users/<user_id>', methods=['GET'])
-def get_user(user_id):
-    pass
-
-# GET User Id, devuelve los datos de la persona que inicio sesion (Devuelve un html)
-# PUT User Id, actualiza los datos de la persona que inicio sesion
-@user_bp.route('/account/<account_id>', methods=['GET', 'PUT'])
-def account(account_id):
+@user_bp.route('/users/<user_id>', methods=['GET', 'PUT'])
+def user(user_id):
     if request.method == 'GET':
-        pass
+        user = get_db().execute(
+            'SELECT * FROM user WHERE id=?', (user_id)
+        ).fetchone()
+        return render_template('user.html', user=user)
     else:
-        pass
+        pass #Guardar

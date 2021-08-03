@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Usuario{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="put">
+    <label for="name">Nombre(s)</label>
+    <input name="name" id="name" value={{ user[3] }} required>
+    <label for="last_name">Apellidos</label>
+    <input name="last_name" id="last_name" value={{ user[4] }} required>
+    <label for="email">Email</label>
+    <input name="email" id="email" value={{ user[1] }} required>
+    <input type="submit" value="Guardar">
+  </form>
+{% endblock %}
