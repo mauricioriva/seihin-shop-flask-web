@@ -10,33 +10,43 @@ auth_bp = Blueprint('auth_page', __name__, template_folder='./../templates/auth'
 @auth_bp.route('/oauth/login', methods=['GET', 'POST'])
 def login():
     error = None
+    self.password = generate_password_hash(password)
+    # self.username = username
+        return check_password_hash(self.password, password)
     if request.method == 'POST':
-        # 1 Check username and password in db
-        # 2 Redirect to home page
-        # return redirect(url_for('products_page.products'))
-        pass
+        username = request.form['username']
+        password = request.form['password']
+        user = get_db().execute('SELECT * FROM user WHERE username=?', (username,)).fetchone()
+        if (user[2] == password): 
+            # return check_password_hash(self.password, password) # Implementar hash
+            # Guardar entidad en g
+            g.user = user
+            return redirect(url_for('users_page.users'))
+        else:
+            return redirect(url_for('auth_page.login')), 200
     else:
-        # Display HTML to make POST request
         return render_template('login.html', error=error)
 
 @auth_bp.route('/oauth/signup', methods=['GET', 'POST'])
 def signup():
     error = None
     if request.method == 'POST':
-        # 1 Register username and password in db
-        # 2 Redirect to login
-        # return redirect(url_for('auth_page.login'))
-        pass
+        username = request.form['username']
+        password = request.form['password'] # Hashea contrasena
+        name = request.form['name']
+        last_name = request.form['last_name']
+        get_db().execute('INSERT INTO user (name, last_name, username, password) VALUES (?, ?, ?, ?)', (name, last_name, username, password))
+        get_db().commit()
+        return redirect(url_for('auth_page.login'))
     else:
-        # Display HTML to make POST request
-        # return render_template('signup.html', error=error)
-        pass
+        return render_template('signup.html', error=error)
+
 
 @auth_bp.route('/oauth/logout', methods=['GET'])
 def logout():
-    # session.clear()
-    # return redirect(url_for('auth_page.login'))
-    pass
+    session.clear()
+    return redirect(url_for('auth_page.login'))
+    # pass
 
 @auth_bp.before_app_request
 def load_logged_in_user():
