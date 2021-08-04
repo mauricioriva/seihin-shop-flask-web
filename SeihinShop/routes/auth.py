@@ -1,3 +1,4 @@
+from SeihinShop.routes.user import user
 from flask import request, Blueprint, render_template, redirect, url_for, g, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import functools
@@ -10,9 +11,8 @@ auth_bp = Blueprint('auth_page', __name__, template_folder='./../templates/auth'
 @auth_bp.route('/oauth/login', methods=['GET', 'POST'])
 def login():
     error = None
-    self.password = generate_password_hash(password)
-    # self.username = username
-        return check_password_hash(self.password, password)
+    # self.password = generate_password_hash(password)
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
