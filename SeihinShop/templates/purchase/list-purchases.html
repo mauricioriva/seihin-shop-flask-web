@@ -1,2 +1,29 @@
 <!-- Lista las compras que ha hecho el usuario (lista los productos)-->
 <!-- Boton para ver ir a la plantilla de ver una compra -->
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Your Purchases{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th class="text-center">Producto</th>
+            <th class="text-center">Precio</th>
+            <th class="text-center">Id de compra</th>
+            <th class="text-center">Fecha de compra</th>
+            <th class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for purchase in purchases: %}
+        <td class="text-center align-middle">{{ purchase[0] }}</td>
+        <td class="text-center align-middle">{{ purchase[1] }}</td>
+        <td class="text-center align-middle">{{ purchase[2] }}</td>
+        <td class="text-center align-middle">{{ purchase[3] }}</td>
+    </tbody>
+      {% endfor %}
+  </table>
+{% endblock %}
