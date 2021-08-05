@@ -6,7 +6,7 @@
   <h1>Seihin Shop</h1>
   <ul>
     {% if g.user %}
-      <li><span>{{ g.user[0] }}</span>
+      <li><span>{{ g.user['user_id'] }}</span>
       <li><a href="{{ url_for('products_page.products') }}">Productos</a>
       <li><a href="{{ url_for('purchase_page.purchases') }}">Comprado</a>
       <li><a href="{{ url_for('products_page.on_sale') }}">En venta</a>
