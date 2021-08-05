@@ -1,6 +1,4 @@
-from SeihinShop.routes.user import user
 from flask import request, Blueprint, render_template, redirect, url_for, g, session
-from werkzeug.security import check_password_hash, generate_password_hash
 import functools
 from ..db import get_db
 
@@ -12,18 +10,20 @@ auth_bp = Blueprint('auth_page', __name__, template_folder='./../templates/auth'
 def login():
     error = None
     # self.password = generate_password_hash(password)
-
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         user = get_db().execute('SELECT * FROM user WHERE username=?', (username,)).fetchone()
-        if (user[2] == password): 
+        #if (not user):
+        #    return redirect(url_for('auth_page.login'))
+        if (user[2] == password):
             # return check_password_hash(self.password, password) # Implementar hash
             # Guardar entidad en g
-            g.user = user
+            session.clear()
+            session['user_id'] = user[0]
             return redirect(url_for('users_page.users'))
         else:
-            return redirect(url_for('auth_page.login')), 200
+            return redirect(url_for('auth_page.login'))
     else:
         return render_template('login.html', error=error)
 
@@ -40,7 +40,6 @@ def signup():
         return redirect(url_for('auth_page.login'))
     else:
         return render_template('signup.html', error=error)
-
 
 @auth_bp.route('/oauth/logout', methods=['GET'])
 def logout():
@@ -62,11 +61,10 @@ def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('auth_page.login'))
         return view(**kwargs)
     return wrapped_view
 
 @auth_bp.route('/', methods=['GET'])
 def home():
     return redirect(url_for('auth_page.login'))
-    
