@@ -8,13 +8,19 @@
   <table class="table">
     <thead class="thead-light">
         <tr>
-            <th class="text-center">Reseñas</th>
+            <th class="text-center">Usuario</th>
+            <th class="text-center">Producto</th>
+            <th class="text-center">Reseña</th>
+            <th class="text-center">Calificacion</th>
             <th class="text-center"></th>
         </tr>
     </thead>
     <tbody>
       {% for review in reviews: %}
-        <td class="text-center align-middle">{{ review[3] }}</td>
+      <td class="text-center align-middle">{{ review[1] }}</td>
+      <td class="text-center align-middle">{{ review[2] }}</td>
+      <td class="text-center align-middle">{{ review[3] }}</td>
+      <td class="text-center align-middle">{{ review[4] }}</td>
         <!-- <td class="text-center align-middle"><a href="{{ url_for('users_page.user', user_id=user[0]) }}">Ver mas</a></td> -->
     </tbody>
       {% endfor %}
