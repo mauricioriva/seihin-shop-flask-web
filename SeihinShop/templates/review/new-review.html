@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Nueva Reseña{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="put">
+    <p>Nueva Reseña</p><br/>
+    <textarea name="comentario" rows="5" cols="50">Escribe tu comentario: </textarea>
+    <input type="submit" value="Guardar">
+  </form>
+{% endblock %}

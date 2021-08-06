@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Lista Reseñas{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th class="text-center">Reseñas</th>
+            <th class="text-center"></th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for review in reviews: %}
+        <td class="text-center align-middle">{{ review[3] }}</td>
+        <!-- <td class="text-center align-middle"><a href="{{ url_for('users_page.user', user_id=user[0]) }}">Ver mas</a></td> -->
+    </tbody>
+      {% endfor %}
+  </table>
+{% endblock %}
