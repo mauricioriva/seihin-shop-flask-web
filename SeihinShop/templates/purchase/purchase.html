@@ -1,5 +1,5 @@
 <!-- Plantilla de la compra -->
-{% extends 'base.html'}
+{% extends 'base.html' %}
 
 {% block header %}
   <h1>{% block title %} Confirm your personal information {% endblock %}</h1>
@@ -9,7 +9,7 @@
   <form method="post">
     <label for="address">Address</label>
     <input name="address" id="address" required>
-  </form>
+
 
   <label for="payment">Choose a payment method:</label>
 
@@ -18,4 +18,8 @@
     <option value="credit-debit">Credit/Debit card</option>
 
   </select>
+
+  <input type="submit" value="Confirm your purchase">
+
+</form>
 {% endblock %}

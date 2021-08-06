@@ -2,8 +2,8 @@ from flask import request, Blueprint, render_template
 from flask.helpers import url_for
 from werkzeug.utils import redirect
 from ..db import get_db
-import datetime
-purchase_bp = Blueprint('purchase_page', __name__, template_folder='templates')
+from datetime import date
+purchase_bp = Blueprint('purchase_page', __name__, template_folder='./../templates/purchase')
 
 # GET products purchased by user (obtienes la lista de productos comprados) (Devuelve un html)
 # HINT: return render_template('your_view.html', your_list=your_list)
@@ -15,12 +15,15 @@ def purchases(user_id):
     return render_template('purchase/list-purchases.html', purchases=purchases, name=name)
 
 # POST purchase, un usuario compra un producto
-@purchase_bp.route('/products/<product_id>/users/<user_id>/purchase', methods=['POST'])
-def user_purchase_product(product_id,user_id):
+@purchase_bp.route('/products/<product_id>/users/<user_id>/purchase', methods=['POST', 'GET'])
+def user_purchase_product(product_id, user_id):
     error = None
-    payment = request.form('payment')
-    address = request.form('address')
+    if request.method == 'POST':
+        payment_selected = request.form['payment']
+        address_selected = request.form['address']
 
-    get_db().execute(f'INSERT INTO purchase (user_id, product_id, date) VALUES ({user_id}, {product_id}, {datetime.datetime.date()})')
-    get_db().commit()
-    return render_template('purchase/purchase.html')
+        get_db().execute(f'INSERT INTO purchase (user_id, product_id, date, address, payment) VALUES (?, ?, ?, ?, ?)', (user_id, product_id, date.today(), address_selected, payment_selected))
+        get_db().commit()
+        return redirect(url_for(f'purchase_page.purchases', user_id=user_id ))
+    else:
+        return render_template('purchase.html', error=error)
