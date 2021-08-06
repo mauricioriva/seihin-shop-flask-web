@@ -9,13 +9,18 @@ purchase_bp = Blueprint('purchase_page', __name__, template_folder='templates')
 # HINT: return render_template('your_view.html', your_list=your_list)
 @purchase_bp.route('/users/<user_id>/purchases', methods=['GET'])
 def purchases(user_id):
+    name = get_db().execute(f'SELECT name FROM user WHERE user.id = {user_id}').fetchall()
     purchases = get_db().execute(
         f'SELECT p.name, p.price, pur.id, pur.date FROM product p LEFT JOIN purchase AS pur ON pur.product_id = p.id WHERE pur.user_id = {user_id}').fetchall()
-    return render_template('purchase/list-purchases.html', purchases=purchases)
+    return render_template('purchase/list-purchases.html', purchases=purchases, name=name)
 
 # POST purchase, un usuario compra un producto
 @purchase_bp.route('/products/<product_id>/users/<user_id>/purchase', methods=['POST'])
 def user_purchase_product(product_id,user_id):
+    error = None
+    payment = request.form('payment')
+    address = request.form('address')
+
     get_db().execute(f'INSERT INTO purchase (user_id, product_id, date) VALUES ({user_id}, {product_id}, {datetime.datetime.date()})')
     get_db().commit()
-    return redirect(url_for('/users/<user_id>/purchases'))
+    return render_template('purchase/purchase.html')

@@ -3,17 +3,17 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Your Purchases{% endblock %}</h1>
+  <h1>{% block title %}Your Purchases, {{ name[0][0] }} {% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
   <table class="table">
     <thead class="thead-light">
         <tr>
-            <th class="text-center">Producto</th>
-            <th class="text-center">Precio</th>
-            <th class="text-center">Id de compra</th>
-            <th class="text-center">Fecha de compra</th>
+            <th class="text-center">Product</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Purchase Id</th>
+            <th class="text-center">Purchase date</th>
             <th class="text-center"></th>
         </tr>
     </thead>
@@ -26,4 +26,5 @@
     </tbody>
       {% endfor %}
   </table>
+
 {% endblock %}
