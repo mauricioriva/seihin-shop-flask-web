@@ -14,12 +14,9 @@ def users():
 
 # GET user, obtienes la informacion de un usuario (Devuelve un html)
 # HINT: return render_template('your_view.html', your_list=your_list)
-@user_bp.route('/users/<user_id>', methods=['GET', 'PUT'])
+@user_bp.route('/users/<user_id>', methods=['GET'])
 def user(user_id):
-    if request.method == 'GET':
-        user = get_db().execute(
-            'SELECT * FROM user WHERE id=?', (user_id)
-        ).fetchone()
-        return render_template('user.html', user=user)
-    else:
-        pass #Guardar
+    user = get_db().execute(
+        'SELECT * FROM user WHERE id=?', (user_id)
+    ).fetchone()
+    return render_template('user.html', user=user)

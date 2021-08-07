@@ -6,12 +6,11 @@
   <h1>Seihin Shop</h1>
   <ul>
     {% if g.user %}
-      <li><span>{{ g.user['user_id'] }}</span>
-      <li><a href="{{ url_for('products_page.products') }}">Productos</a>
+      <li><span>Hola {{ g.user[3] }}</span>
+      <li><a href="{{ url_for('products_page.products') }}">Inicio</a>
       <li><a href="{{ url_for('purchase_page.purchases') }}">Comprado</a>
-      <li><a href="{{ url_for('products_page.on_sale') }}">En venta</a>
+      <li><a href="{{ url_for('products_page.my_products') }}">Mis Productos</a>
       <li><a href="{{ url_for('users_page.users') }}">Usuarios</a>
-      <li><a href="{{ url_for('users_page.account') }}">Mi cuenta</a>
       <li><a href="{{ url_for('auth_page.logout') }}">Log Out</a>
     {% else %}
       <li><a href="{{ url_for('auth_page.signup') }}">Sign up</a>

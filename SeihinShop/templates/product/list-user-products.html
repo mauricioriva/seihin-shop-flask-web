@@ -4,7 +4,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Productos{% endblock %}</h1>
+  <h1>{% block title %}Mis Productos{% endblock %}<a href="{{ url_for('products_page.new_product_template') }}"><p style="text-align:right;">Nuevo</p></a></h1>
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
         <tr>
             <th class="text-center">Nombre</th>
             <th class="text-center">Precio</th>
-            <th class="text-center">Usuario</th>
+            <th class="text-center">En venta</th>
             <th class="text-center"></th>
         </tr>
     </thead>
@@ -22,7 +22,7 @@
       {% for product in products: %}
         <td class="text-center align-middle">{{ product[2] }}</td>
         <td class="text-center align-middle">{{ product[4] }}</td>
-        <td class="text-center align-middle">{{ product[9] }}</td>
+        <td class="text-center align-middle">{{ product[5] }}</td>
         <td class="text-center align-middle"><a href="{{ url_for('products_page.existing_product', product_id=product[0]) }}">Ver mas</a></td>
     </tbody>
       {% endfor %}

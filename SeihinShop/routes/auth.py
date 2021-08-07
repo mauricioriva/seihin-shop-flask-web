@@ -14,14 +14,13 @@ def login():
         username = request.form['username']
         password = request.form['password']
         user = get_db().execute('SELECT * FROM user WHERE username=?', (username,)).fetchone()
-        #if (not user):
-        #    return redirect(url_for('auth_page.login'))
+        if (not user):
+            return redirect(url_for('auth_page.login'))
         if (user[2] == password):
             # return check_password_hash(self.password, password) # Implementar hash
             # Guardar entidad en g
-            session.clear()
             session['user_id'] = user[0]
-            return redirect(url_for('users_page.users'))
+            return redirect(url_for('products_page.products'))
         else:
             return redirect(url_for('auth_page.login'))
     else:
@@ -52,10 +51,6 @@ def load_logged_in_user():
     user_id = session.get('user_id')
     if user_id is None:
         g.user = None
-    else:
-        get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
-        ).fetchone()
 
 def login_required(view):
     @functools.wraps(view)
