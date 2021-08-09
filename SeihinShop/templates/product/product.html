@@ -26,6 +26,8 @@
     <input name="description" id="description" value="{{ product[3] }}" required>
     <label for="price">Precio</label>
     <input name="price" id="price" value="{{ product[4] }}" required>
+    <td class="text-center align-middle"><a href="{{ url_for('purchase_page.user_purchase_product', product_id=product[0]) }}">Comprar</a></td>
+
   </form>
 {% endif %}
 {% endblock %}
