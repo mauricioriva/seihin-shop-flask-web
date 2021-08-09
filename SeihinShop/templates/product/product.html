@@ -1,2 +1,31 @@
 <!-- Plantilla para ver la informacion de un producto -->
 <!-- 1 Boton para guardar los datos de ese producto (update) -->
+<!-- Plantilla para crear nuevo producto, manda a llamar POST /products -->
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ product[2] }}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+{% if g.user[0] == product[1] %}
+  <form method="post">
+    <label for="name">Nombre</label>
+    <input name="name" id="name" value="{{ product[2] }}" required>
+    <label for="description">Descripcion</label>
+    <input name="description" id="description" value="{{ product[3] }}" required>
+    <label for="price">Precio</label>
+    <input name="price" id="price" value="{{ product[4] }}" required>
+    <label for="on_sale">En venta</label>
+    <input name="on_sale" id="on_sale" value="{{ product[5] }}" required>
+    <input type="submit" value="Guardar">
+  </form>
+{% else %}
+  <form>
+    <label for="description">Descripcion</label>
+    <input name="description" id="description" value="{{ product[3] }}" required>
+    <label for="price">Precio</label>
+    <input name="price" id="price" value="{{ product[4] }}" required>
+  </form>
+{% endif %}
+{% endblock %}

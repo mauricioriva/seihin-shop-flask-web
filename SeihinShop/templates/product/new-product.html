@@ -1,1 +1,18 @@
 <!-- Plantilla para crear nuevo producto, manda a llamar POST /products -->
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Nuevo Producto{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="name">Nombre(s)</label>
+    <input name="name" id="name" required>
+    <label for="description">Descripcion</label>
+    <input name="description" id="description" required>
+    <label for="price">Precio</label>
+    <input type="number" min="0" step="1" name="price" id="price" required>
+    <input type="submit" value="Guardar">
+  </form>
+{% endblock %}
