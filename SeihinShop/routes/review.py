@@ -9,9 +9,12 @@ review_bp = Blueprint('reviews_page', __name__, template_folder='templates')
 @review_bp.route('/products/<product_id>/reviews', methods=['GET', 'POST'])
 def reviews(product_id):
     if request.method == 'GET':
-        return list_reviews(request, product_id)
+        reviews = get_db().execute(
+            'SELECT * FROM review'
+        ).fetchall()
+        return render_template('review.html', reviews = reviews)
     else:
-        return create_review(request, product_id)
+        pass
 
 # Crea una resena sobre el producto
 def create_review(req, product_id):
@@ -19,9 +22,10 @@ def create_review(req, product_id):
 
 # Devuelve la lista de resenas del producto (Devuelve HTML)
 def list_reviews(req, product_id):
-    pass
+
+    return render_template('list_reviews.html')
 
 # Devuelve plantilla HTML para crear nueva resena sobre ese producto
 @review_bp.route('/products/<product_id>/reviews/new', methods=['GET'])
 def new_review(product_id):
-    pass
+    return render_template('new_review.html', review = review)
