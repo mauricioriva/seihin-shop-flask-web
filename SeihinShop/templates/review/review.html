@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Reseña{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="put">
+    <label for="name">Usuario</label>
+    <input name="name" id="name" value={{ review[1] }} required>
+    <label for="last_name">Producto</label>
+    <input name="last_name" id="last_name" value={{ review[2] }} required>
+    <label for="username">Username</label>
+    <input name="username" id="username" value={{ user[1] }} required>
+    <input type="submit" value="Guardar">
+  </form>
+{% endblock %}
