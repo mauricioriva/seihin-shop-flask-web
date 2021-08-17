@@ -12,7 +12,7 @@ def purchases():
     user_id = session.get('user_id')
     name = get_db().execute(f'SELECT name FROM user WHERE user.id = {user_id}').fetchall()
     purchases = get_db().execute(
-        f'SELECT p.name, p.price, pur.id, pur.date FROM product p LEFT JOIN purchase AS pur ON pur.product_id = p.id WHERE pur.user_id = {user_id}').fetchall()
+        f'SELECT p.name, p.price, pur.id, pur.date, p.id FROM product p LEFT JOIN purchase AS pur ON pur.product_id = p.id WHERE pur.user_id = {user_id}').fetchall()
     return render_template('purchase/list-purchases.html', purchases=purchases, name=name)
     
 # POST purchase, un usuario compra un producto

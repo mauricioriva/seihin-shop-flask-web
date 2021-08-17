@@ -5,11 +5,26 @@
 {% endblock %}
 
 {% block content %}
-  <form method="put">
-    <p>Nueva Reseña</p><br/>
-    <textarea name="comentario" rows="10" cols="50">Escribe tu comentario: </textarea>
-    <label for="score">Calificacion</label>
-    <input name="score" id="score" value={{ review[4] }} required>
+  <form method="post">
+    <label for="description"></label>
+    <textarea name="description" id="description" rows="10" cols="50">Aquí escribe tu comentario: </textarea>
+
+    <label for="score">Calificacion (1 a 10)</label>
+    <select name="score" id="score">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+
+    </select>
+
+
     <input type="submit" value="Guardar">
   </form>
 {% endblock %}
