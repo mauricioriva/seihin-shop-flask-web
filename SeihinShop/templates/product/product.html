@@ -16,8 +16,9 @@
     <input name="description" id="description" value="{{ product[3] }}" required>
     <label for="price">Precio</label>
     <input name="price" id="price" value="{{ product[4] }}" required>
-    <label for="on_sale">En venta</label>
-    <input name="on_sale" id="on_sale" value="{{ product[5] }}" required>
+    <select name="on_sale" id="on_sale">
+      <option value="1">En venta</option>
+      <option value="0">No disponible</option>
     <input type="submit" value="Guardar">
   </form>
 {% else %}

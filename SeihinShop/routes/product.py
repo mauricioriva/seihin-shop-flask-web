@@ -19,6 +19,10 @@ def products():
             return render_template('list-products.html', products=products, search = search)
         return render_template('list-products.html')
     else:
+        products = get_db().execute(
+            f"SELECT * FROM product LEFT JOIN user ON product.user_id = user.id WHERE product.on_sale > 0 ").fetchall()
+        if (len(products) > 0):
+            return render_template('list-products.html', products=products)
         return render_template('list-products.html', error = error)
 
 # GET Product Id, devuelve los datos de ese producto
