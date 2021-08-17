@@ -19,7 +19,7 @@ CREATE TABLE product (
   name TEXT NOT NULL,
   description TEXT NOT NULL,
   price INTEGER NOT NULL,
-  on_sale INTEGER DEFAULT 1 NOTNULL,
+  on_sale INTEGER DEFAULT 1,
   FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
