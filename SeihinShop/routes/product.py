@@ -61,13 +61,8 @@ def new_product_template():
 def create_product(req):
     name = req.form['name']
     description = req.form['description']
-<<<<<<< HEAD
     price = req.form['price']
-    get_db().execute('INSERT INTO product (name, description, price, on_sale, user_id) VALUES (?, ?, ?, ?, ?)', (name, description, price, 0, session.get('user_id')))
-=======
-    price = int(req.form['price'])
     get_db().execute('INSERT INTO product (name, description, price, on_sale, user_id) VALUES (?, ?, ?, ?, ?)', (name, description, price, 1, session.get('user_id')))
->>>>>>> main
     get_db().commit()
     return redirect(url_for('products_page.products'))
 
