@@ -14,7 +14,7 @@ def products():
     if request.method == 'POST':
         search = request.form['search']
         products = get_db().execute(
-            f"SELECT * FROM product LEFT JOIN user ON product.user_id = user.id WHERE product.on_sale = 1 AND product.name LIKE '%{search}%' ").fetchall()
+            f"SELECT * FROM product LEFT JOIN user ON product.user_id = user.id WHERE product.on_sale > 0 AND product.name LIKE '%{search}%' ").fetchall()
         if (len(products) > 0):
             return render_template('list-products.html', products=products, search = search)
         return render_template('list-products.html')
@@ -66,7 +66,7 @@ def create_product(req):
     name = req.form['name']
     description = req.form['description']
     price = int(req.form['price'])
-    get_db().execute('INSERT INTO product (name, description, price, on_sale, user_id) VALUES (?, ?, ?, ?, ?)', (name, description, price, 0, session.get('user_id')))
+    get_db().execute('INSERT INTO product (name, description, price, on_sale, user_id) VALUES (?, ?, ?, ?, ?)', (name, description, price, 1, session.get('user_id')))
     get_db().commit()
     return redirect(url_for('products_page.products'))
 

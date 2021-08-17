@@ -39,7 +39,11 @@ def signup():
         name = request.form['name']
         last_name = request.form['last_name']
         email = request.form['email']
-        is_vendedor = request.form['is_vendedor']
+        rol = request.form['is_vendedor']
+        if rol == 'Vendedor':
+            is_vendedor = 1
+        else:
+            is_vendedor = 0
         alphabet = string.ascii_letters + string.digits
         password = ''.join(secrets.choice(alphabet) for i in range(20))
         get_db().execute('INSERT INTO user (name, last_name, username, password, email, is_vendedor) VALUES (?, ?, ?, ?, ?, ?)', (name, last_name, username, password, email, is_vendedor))
