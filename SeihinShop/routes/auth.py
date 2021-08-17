@@ -39,9 +39,10 @@ def signup():
         name = request.form['name']
         last_name = request.form['last_name']
         email = request.form['email']
+        is_vendedor = request.form['is_vendedor']
         alphabet = string.ascii_letters + string.digits
         password = ''.join(secrets.choice(alphabet) for i in range(20))
-        get_db().execute('INSERT INTO user (name, last_name, username, password, email) VALUES (?, ?, ?, ?, ?)', (name, last_name, username, password, email))
+        get_db().execute('INSERT INTO user (name, last_name, username, password, email, is_vendedor) VALUES (?, ?, ?, ?, ?, ?)', (name, last_name, username, password, email, is_vendedor))
         get_db().commit()
         msg = Message("Gracias por Registrarte en Seihin Shop",
             sender="seihinshop2021@gmail.com",
