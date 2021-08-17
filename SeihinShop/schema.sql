@@ -8,7 +8,9 @@ CREATE TABLE user (
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   name TEXT NOT NULL,
-  last_name TEXT NOT NULL
+  last_name TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  is_vendedor INTEGER NOT NULL
 );
 
 CREATE TABLE product (
