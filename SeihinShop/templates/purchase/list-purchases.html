@@ -14,15 +14,17 @@
             <th class="text-center">Price</th>
             <th class="text-center">Purchase Id</th>
             <th class="text-center">Purchase date</th>
+            <th class="text-center">Reseña</th>
             <th class="text-center"></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody>               
       {% for purchase in purchases: %}
         <td class="text-center align-middle">{{ purchase[0] }}</td>
         <td class="text-center align-middle">{{ purchase[1] }}</td>
         <td class="text-center align-middle">{{ purchase[2] }}</td>
         <td class="text-center align-middle">{{ purchase[3] }}</td>
+        <td class="text-center align-middle"><a href="{{ url_for('reviews_page.new_review', product_id=purchase[4]) }}">Crear reseña</a></td>
     </tbody>
       {% endfor %}
   </table>

@@ -27,6 +27,7 @@
     <label for="price">Precio</label>
     <input name="price" id="price" value="{{ product[4] }}" required>
     <td class="text-center align-middle"><a href="{{ url_for('purchase_page.user_purchase_product', product_id=product[0]) }}">Comprar</a></td>
+    <td class="text-center align-middle"><a href="{{ url_for('reviews_page.reviews', product_id=product[0]) }}">Ver reseñas</a></td>
 
   </form>
 {% endif %}

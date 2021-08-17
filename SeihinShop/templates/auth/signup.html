@@ -14,8 +14,12 @@
     <input name="username" id="username" required>
     <label for="email">Email</label>
     <input name="email" id="email" required>
-    <label for="is_vendedor">Rol (0 para comprador , 1 para vendedor)</label>
-    <input type="number" name="is_vendedor" id="is_vendedor" required>
+    <label for="is_vendedor">Rol</label>
+    <select name="is_vendedor" id="is_vendedor">
+      <option value="Vendedor">Vendedor</option>
+      <option value="Comprador">Comprador</option>
+
+    </select>
     <input type="submit" value="Register">
   </form>
 {% endblock %}

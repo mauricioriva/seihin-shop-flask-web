@@ -1,0 +1,18 @@
+<!-- Plantilla de la reseña -->
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Reseña{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="put">
+    <label for="name">Usuario</label>
+    <input name="name" id="name" required>
+    <label for="last_name">Producto</label>
+    <input name="last_name" id="last_name" required>
+    <label for="username">Descripcion</label>
+    <input name="username" id="username" required>
+    <input type="submit" value="Guardar">
+  </form>
+{% endblock %}
