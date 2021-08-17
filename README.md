@@ -2,7 +2,13 @@ Seihin Shop
 ===========
 
 ##  Installation
-https://flask.palletsprojects.com/en/2.0.x/installation/
+[Flask](https://flask.palletsprojects.com/en/2.0.x/installation/)
+
+    $ pip install Flask
+
+[Flask Mail](https://pythonhosted.org/Flask-Mail/)
+
+    $ pip install Flask-Mail
 
 ## Set Env
 
