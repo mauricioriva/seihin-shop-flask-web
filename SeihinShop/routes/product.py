@@ -1,3 +1,4 @@
+from re import search
 from flask import request, Blueprint, g, session, redirect, url_for
 from flask.templating import render_template
 from ..db import get_db
@@ -7,13 +8,22 @@ product_bp = Blueprint('products_page', __name__, template_folder='./../template
 # GET Products (obtienes la lista de productos registrados (buscador))
 # Devuelve lista de productos (Devuelve un html)
 # HINT: return render_template('your_view.html', your_list=your_list)
-@product_bp.route('/products', methods=['GET'])
+@product_bp.route('/products', methods=['GET', 'POST'])
 def products():
-    products = get_db().execute(
-        'SELECT * FROM product LEFT JOIN user ON product.user_id = user.id WHERE product.on_sale = 1').fetchall()
-    if (len(products) > 0):
-        return render_template('list-products.html', products=products)
-    return render_template('list-products.html')
+    error = None
+    if request.method == 'POST':
+        search = request.form['search']
+        products = get_db().execute(
+            f"SELECT * FROM product LEFT JOIN user ON product.user_id = user.id WHERE product.on_sale = 1 AND product.name LIKE '%{search}%' ").fetchall()
+        if (len(products) > 0):
+            return render_template('list-products.html', products=products, search = search)
+        return render_template('list-products.html')
+    else:
+        return render_template('list-products.html', error = error)
+
+
+
+
 
 # GET Product Id, devuelve los datos de ese producto
 # PUT Product Id, actualiza los datos de ese producto
