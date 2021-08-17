@@ -26,6 +26,10 @@ def user_purchase_product(product_id):
 
         get_db().execute(f'INSERT INTO purchase (user_id, product_id, date, address, payment) VALUES (?, ?, ?, ?, ?)', (user_id, product_id, date.today(), address_selected, payment_selected))
         get_db().commit()
+
+        get_db().execute(f'UPDATE product SET on_sale = on_sale - 1 WHERE id = {product_id}')
+        get_db().commit()
+
         return redirect(url_for(f'purchase_page.purchases', user_id=user_id ))
     else:
         return render_template('purchase.html', error=error)
